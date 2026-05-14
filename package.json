@@ -4,8 +4,10 @@
   "description": "",
   "author": "",
   "private": true,
+  "packageManager": "pnpm@11.1.2",
   "license": "UNLICENSED",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

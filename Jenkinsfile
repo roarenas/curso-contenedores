@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'container'
+    }
     stages{
         stage("Primer paso pipeline") {
             steps{

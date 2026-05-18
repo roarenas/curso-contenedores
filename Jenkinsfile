@@ -13,5 +13,10 @@ pipeline {
                 sh 'node --version'
             }
         }
+        stage("Tercer paso paso pipeline") {
+            steps{
+                sh 'docker ps'
+            }
+        }
     }
 }

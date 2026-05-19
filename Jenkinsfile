@@ -24,7 +24,7 @@ pipeline {
         stage("Cuarto paso paso pipeline") {
             agent {
                 docker {
-                    imagen 'node:22'
+                    image 'node:22'
                     label 'wsl'
                 }
             }

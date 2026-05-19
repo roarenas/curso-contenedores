@@ -1,35 +1,21 @@
 pipeline {
-    agent {
-        label 'wsl'
-    }
+    agent none
+
     stages{
-        stage("Primer paso pipeline") {
-            steps{
-                sh 'echo "saludos desde el terminal"'
-            }
-        }
-        stage("Segundo paso paso pipeline") {
-            agent {
-                label 'container'
-            }
-            steps{
-                sh 'node --version'
-            }
-        }
-        stage("Tercer paso paso pipeline") {
-            steps{
-                sh 'docker ps'
-            }
-        }
-        stage("Cuarto paso paso pipeline") {
-            agent {
+        stage('CI - de nuestra aplicacion de contenedores'){
+            agent{
                 docker {
-                    image 'node:22'
-                    label 'wsl'
+                    image 'ghcr.io/pnpm/pnpm:latest'
+                    label 'docker'
                 }
             }
-            steps{
-                sh 'node --version'
+            stages{
+                stage('CI - Instalacion de dependencias'){
+                    sh '''
+                        pnpm install
+                    '''
+                    
+                }
             }
         }
     }

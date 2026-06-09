@@ -54,7 +54,7 @@ pipeline {
                     docker tag ${env.IMAGE_NAME} ${env.GH_REPO}                    
                 '''
                 script{
-                    docker.withRegistry('https://ghcr.io','roarenas'){
+                    docker.withRegistry('https://ghcr.io','github'){
                         sh '''
                             docker push ${env.GH_REPO}
                         '''

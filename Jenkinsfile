@@ -2,9 +2,9 @@ pipeline {
     agent none
     environment{
         IMAGE_NAME = 'curso-contenedores:latest'
-        R_IMAGE_NAME = 'roarenas/${IMAGE_NAME}'
+        R_IMAGE_NAME = "roarenas/${IMAGE_NAME}"
         GHR = 'ghcr.io'
-        GH_REPO = '${GHR}/${R_IMAGE_NAME}'
+        GH_REPO = "${GHR}/${R_IMAGE_NAME}"
     }
     stages{
         stage('CI - de nuestra aplicacion de contenedores'){
@@ -52,12 +52,12 @@ pipeline {
                 sh '''
                     echo ${GH_REPO}
                     docker build -t ${IMAGE_NAME} .
-                    docker tag ${IMAGE_NAME} ${GHR}/${R_IMAGE_NAME}                    
+                    docker tag ${IMAGE_NAME} ${GH_REPO}                    
                 '''
                 script{
                     docker.withRegistry('${GHR}','github'){
                         sh '''
-                            docker push ${GHR}/${R_IMAGE_NAME}
+                            docker push ${GH_REPO}
                         '''
                     }
                 }

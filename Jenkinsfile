@@ -45,6 +45,7 @@ pipeline {
             steps{
                 sh '''
                     docker build -t curso-contenedores .
+                    docker push ghcr.io/roarenas/curso-contenedores
                 '''
             }
         }

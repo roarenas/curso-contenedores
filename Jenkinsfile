@@ -1,6 +1,6 @@
 pipeline {
     agent none
-    enviroment{
+    environment{
         IMAGE_NAME = 'curso-contenedores'
         R_IMAGE_NAME = 'roarenas/${env.IMAGE_NAME}'
         GHR = 'ghcr.io'

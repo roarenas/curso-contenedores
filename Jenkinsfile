@@ -4,7 +4,7 @@ pipeline {
         IMAGE_NAME = 'curso-contenedores:latest'
         R_IMAGE_NAME = 'roarenas/${IMAGE_NAME}'
         GHR = 'ghcr.io'
-        GH_REPO = '${env.GHR}/${R_IMAGE_NAME}'
+        GH_REPO = '${GHR}/${R_IMAGE_NAME}'
     }
     stages{
         stage('CI - de nuestra aplicacion de contenedores'){

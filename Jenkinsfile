@@ -50,13 +50,14 @@ pipeline {
             agent { label 'docker'}
             steps{
                 sh '''
+                    echo ${GH_REPO}
                     docker build -t ${IMAGE_NAME} .
-                    docker tag ${IMAGE_NAME} ${GH_REPO}                    
+                    docker tag ${IMAGE_NAME} ${GHR}/${R_IMAGE_NAME}                    
                 '''
                 script{
                     docker.withRegistry('${GHR}','github'){
                         sh '''
-                            docker push ${GH_REPO}
+                            docker push ${GHR}/${R_IMAGE_NAME}
                         '''
                     }
                 }

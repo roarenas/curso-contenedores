@@ -1,5 +1,11 @@
 pipeline {
     agent none
+    enviroment{
+        IMAGE_NAME = 'curso-contenedores'
+        R_IMAGE_NAME = 'roarenas/${env.IMAGE_NAME}'
+        GHR = 'ghcr.io'
+        GH_REPO = '${env.GHR}/${env.R_IMAGE_NAME}'
+    }
     stages{
         stage('CI - de nuestra aplicacion de contenedores'){
             agent{
@@ -44,9 +50,16 @@ pipeline {
             agent { label 'docker'}
             steps{
                 sh '''
-                    docker build -t curso-contenedores -t ghcr.io/roarenas/curso-contenedores .
-                    docker push ghcr.io/roarenas/curso-contenedores
+                    docker build -t ${env.IMAGE_NAME} .
+                    docker tag ${env.IMAGE_NAME} ${env.GH_REPO}                    
                 '''
+                script{
+                    docker.withRegistry{'${env.GHR}','curso-contenedores'}{
+                        sh '''
+                            docker push ${env.GH_REPO}
+                        '''
+                    }
+                }
             }
         }
     }

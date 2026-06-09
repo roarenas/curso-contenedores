@@ -1,7 +1,7 @@
 pipeline {
     agent none
     environment{
-        IMAGE_NAME = 'curso-contenedores'
+        IMAGE_NAME = 'curso-contenedores:latest'
         R_IMAGE_NAME = 'roarenas/${env.IMAGE_NAME}'
         GHR = 'ghcr.io'
         GH_REPO = '${env.GHR}/${env.R_IMAGE_NAME}'
@@ -54,7 +54,7 @@ pipeline {
                     docker tag ${env.IMAGE_NAME} ${env.GH_REPO}                    
                 '''
                 script{
-                    docker.withRegistry('${env.GHR}','curso-contenedores'){
+                    docker.withRegistry('https://ghcr.io','roarenas'){
                         sh '''
                             docker push ${env.GH_REPO}
                         '''

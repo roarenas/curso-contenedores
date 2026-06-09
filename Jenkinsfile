@@ -44,7 +44,7 @@ pipeline {
             agent { label 'docker'}
             steps{
                 sh '''
-                    docker build -t curso-contenedores .
+                    docker build -t curso-contenedores -t ghcr.io/roarenas/curso-contenedores .
                     docker push ghcr.io/roarenas/curso-contenedores
                 '''
             }

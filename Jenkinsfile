@@ -54,7 +54,7 @@ pipeline {
                     docker tag ${env.IMAGE_NAME} ${env.GH_REPO}                    
                 '''
                 script{
-                    docker.withRegistry{'${env.GHR}','curso-contenedores'}{
+                    docker.withRegistry{${env.GHR},'curso-contenedores'}{
                         sh '''
                             docker push ${env.GH_REPO}
                         '''

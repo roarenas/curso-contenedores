@@ -55,7 +55,7 @@ pipeline {
                     docker tag ${IMAGE_NAME} ${GH_REPO}                    
                 '''
                 script{
-                    docker.withRegistry("${GHR}",'github'){
+                    docker.withRegistry("https://${GHR}",'github'){
                         sh '''
                             docker push ${GH_REPO}
                         '''

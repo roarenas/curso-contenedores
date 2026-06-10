@@ -5,7 +5,7 @@ pipeline {
         R_IMAGE_NAME = "roarenas/${IMAGE_NAME}"
         GHR = 'ghcr.io'
         GH_REPO = "${GHR}/${R_IMAGE_NAME}"
-        URL_GHR = "http://${GHR}"
+        URL_GHR = "https://${GHR}"
     }
     stages{
         stage('CI - de nuestra aplicacion de contenedores'){
@@ -51,12 +51,12 @@ pipeline {
             agent { label 'docker'}
             steps{
                 sh '''
-                    echo ${GH_REPO}
+                    echo ${URL_GHR}
                     docker build -t ${IMAGE_NAME} .
                     docker tag ${IMAGE_NAME} ${GH_REPO}                    
                 '''
                 script{
-                    docker.withRegistry("${GHR}",'github'){
+                    docker.withRegistry("${URL_GHR}",'github'){
                         sh '''
                             docker push ${GH_REPO}
                         '''

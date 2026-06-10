@@ -54,13 +54,14 @@ pipeline {
                     echo ${URL_GHR}
                     docker build -t ${IMAGE_NAME}:latest .
                     docker tag ${IMAGE_NAME}:latest ${GH_REPO}:${BUILD_NUMBER}
-                    docker tag ${IMAGE_NAME}:latest ${GH_REPO}
+                    docker tag ${IMAGE_NAME}:latest ${GH_REPO}:latest
                 '''
                 script{
                     docker.withRegistry("${URL_GHR}",'github'){
                         sh '''
+                            echo ${GH_REPO}:${BUILD_NUMBER}
                             docker push ${GH_REPO}:latest
-                            docker push ${GH_REPO}:${BUILD_NUMER}
+                            docker push ${GH_REPO}:${BUILD_NUMBER}
                         '''
                     }
                 }

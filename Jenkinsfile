@@ -68,6 +68,7 @@ pipeline {
                     docker build -t ${IMAGE_NAME}:latest .
                     docker tag ${IMAGE_NAME}:latest ${GH_REPO}:${BUILD_NUMBER}
                     docker tag ${IMAGE_NAME}:latest ${GH_REPO}:latest
+                    docker tag ${IMAGE_NAME}:latest ${GH_REPO}:${env.APP_SEMAMTIC_VERSION}
                 '''
                 script{
                     docker.withRegistry("${URL_GHR}",'github'){
@@ -75,6 +76,7 @@ pipeline {
                             echo ${GH_REPO}:${BUILD_NUMBER}
                             docker push ${GH_REPO}:latest
                             docker push ${GH_REPO}:${BUILD_NUMBER}
+                            docker push ${GH_REPO}:${env.APP_SEMAMTIC_VERSION}
                         '''
                     }
                 }

@@ -53,7 +53,8 @@ pipeline {
                 sh '''
                     echo ${URL_GHR}
                     docker build -t ${IMAGE_NAME} .
-                    docker tag ${IMAGE_NAME} ${GH_REPO}                    
+                    docker tag ${IMAGE_NAME} ${GH_REPO}:${BUILD_NUMBER}
+                    docker tag ${IMAGE_NAME} ${GH_REPO}
                 '''
                 script{
                     docker.withRegistry("${URL_GHR}",'github'){

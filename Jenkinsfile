@@ -40,6 +40,19 @@ pipeline {
                 }
                 stage('CI - Ejecucion de build'){
                     steps{
+                        script{
+                            env.APP_SEMAMTIC_VERSION = sh(
+                                script: '''
+                                  node -p "require('./package.json').version"
+                                ''',
+                                returnSdout:true
+                            ).trim()
+                            echo "Version obtenida ${env.APP_SEMAMTIC_VERSION}"
+                        }
+                    }
+                }
+                stage('CI - Obtener semver o version del software'){
+                    steps{
                         sh '''
                         pnpm build
                         '''

@@ -1,7 +1,7 @@
 pipeline {
     agent none
     environment{
-        IMAGE_NAME = 'curso-contenedores:latest'
+        IMAGE_NAME = 'curso-contenedores'
         R_IMAGE_NAME = "roarenas/${IMAGE_NAME}"
         GHR = 'ghcr.io'
         GH_REPO = "${GHR}/${R_IMAGE_NAME}"
@@ -52,14 +52,15 @@ pipeline {
             steps{
                 sh '''
                     echo ${URL_GHR}
-                    docker build -t ${IMAGE_NAME} .
-                    docker tag ${IMAGE_NAME} ${GH_REPO}:${BUILD_NUMBER}
-                    docker tag ${IMAGE_NAME} ${GH_REPO}
+                    docker build -t ${IMAGE_NAME}:latest .
+                    docker tag ${IMAGE_NAME}:latest ${GH_REPO}:${BUILD_NUMBER}
+                    docker tag ${IMAGE_NAME}:latest ${GH_REPO}
                 '''
                 script{
                     docker.withRegistry("${URL_GHR}",'github'){
                         sh '''
-                            docker push ${GH_REPO}
+                            docker push ${GH_REPO}:latest
+                            docker push ${GH_REPO}:${BUILD_NUMER}
                         '''
                     }
                 }

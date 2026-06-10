@@ -45,7 +45,7 @@ pipeline {
                                 script: '''
                                   node -p "require('./package.json').version"
                                 ''',
-                                returnSdout:true
+                                returnStdout:true
                             ).trim()
                             echo "Version obtenida ${env.APP_SEMAMTIC_VERSION}"
                         }

@@ -5,7 +5,7 @@ pipeline {
         R_IMAGE_NAME = "roarenas/${IMAGE_NAME}"
         GHR = 'ghcr.io'
         GH_REPO = "${GHR}/${R_IMAGE_NAME}"
-        URL_GHR = "${GHR}"
+        URL_GHR = "http://${GHR}"
     }
     stages{
         stage('CI - de nuestra aplicacion de contenedores'){
